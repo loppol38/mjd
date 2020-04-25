@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import api from '../../api'
+// import api from '../../api'
+const api = require('electron').remote.require('./api').default
 
 const state = {
   /**

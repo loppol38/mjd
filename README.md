@@ -9,6 +9,7 @@
 npm install
 
 # serve with hot reload at localhost:9080
+./node_modules/.bin/vue-devtools
 npm run dev
 
 # build electron application for production
