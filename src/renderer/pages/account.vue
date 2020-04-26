@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapGetters } from 'vuex'
   const { BrowserWindow } = require('electron').remote
 
   export default {
@@ -27,30 +27,19 @@
           {
             title: '登录状态',
             key: 'isLogin'
+          },
+          {
+            title: 'plus会员',
+            key: 'isPlusMember'
           }
         ]
       }
     },
     computed: {
-      ...mapState({
-        account: state => state.user.account
-      }),
-      accountList () {
-        let result = []
-        console.log('computed accountList this.account:', this.account)
-        for (const key in this.account) {
-          if (this.account.hasOwnProperty(key)) {
-            console.log('computed accountList this.account key & value', key, this.account[key])
-            result.push(this.account[key])
-          }
-        }
-        return result
-      }
+      ...mapGetters('user', ['accountList'])
     },
     created () {
-    },
-    async mounted () {
-      await this.$store.dispatch('user/checkAccountList')
+      this.$store.dispatch('user/checkAccountList')
     },
     methods: {
       login () {

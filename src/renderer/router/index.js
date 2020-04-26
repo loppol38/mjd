@@ -11,6 +11,11 @@ export default new Router({
       component: require('@/pages/account').default
     },
     {
+      path: '/task',
+      name: 'task',
+      component: require('@/pages/task').default
+    },
+    {
       path: '*',
       redirect: '/'
     }

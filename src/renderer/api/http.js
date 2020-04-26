@@ -1,6 +1,8 @@
+'use strict'
+
 import axios from 'axios'
 // import qs from "qs";
-axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
+axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.withCredentials = true
 
 const http = axios.create({

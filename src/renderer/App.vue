@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Menu mode="horizontal" theme="light" active-name="1">
-      <MenuItem name="1">
+    <Menu mode="horizontal" theme="light" active-name="account">
+      <MenuItem name="account" to="/">
         <Icon type="ios-people" />
         账号管理
       </MenuItem>
-      <MenuItem name="2">
+      <MenuItem name="task" to="/task">
         <Icon type="ios-paper" />
         任务清单
       </MenuItem>
@@ -26,9 +26,8 @@
 <!--      </Submenu>-->
     </Menu>
     <div class="main">
-
+      <router-view></router-view>
     </div>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -53,9 +52,9 @@
 
   #app {
     background: radial-gradient(
-      ellipse at top left,
-      rgba(255, 255, 255, 1) 40%,
-      rgba(229, 229, 229, .9) 100%
+      ellipse at center,
+      rgba(229, 229, 229, 1) 40%,
+      rgba(200, 200, 200, .9) 100%
     );
     height: 100vh;
     padding: 60px 80px;

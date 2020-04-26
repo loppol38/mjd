@@ -68,6 +68,12 @@ function startRenderer () {
             secure: true,  // 如果是https接口，需要配置这个参数
             changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
             pathRewrite: {'^/order_jd_com': '/'}  // pathRewrite 来重写地址，将前缀 '/order_jd_com' 转为 '/'。
+          },
+          '/marathon_jd_com': {
+            target: 'https://marathon.jd.com',
+            secure: true,
+            changeOrigin: true,
+            pathRewrite: {'^/marathon_jd_com': '/'}
           }
         },
         contentBase: path.join(__dirname, '../'),

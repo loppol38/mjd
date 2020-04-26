@@ -1,5 +1,4 @@
 import Vue from 'vue'
-// import api from '../../api'
 const api = require('electron').remote.require('./api').default
 
 const state = {
@@ -9,13 +8,24 @@ const state = {
    * @property name
    * @property cookie
    * @property isLogin
+   * @property isPlusMember
    */
   account: {}
 }
-
+const getters = {
+  accountList: state => {
+    let result = []
+    for (const key in state.account) {
+      if (state.account.hasOwnProperty(key)) {
+        result.push(state.account[key])
+      }
+    }
+    return result
+  }
+}
 const mutations = {
-  SAVE_OR_UPDATE (state, { pinId, name, cookie, isLogin }) {
-    let params = {name, cookie, isLogin}
+  SAVE_OR_UPDATE (state, { pinId, name, cookie, isLogin, isPlusMember }) {
+    let params = {name, cookie, isLogin, isPlusMember}
     if (!name) {
       params.name = state.account[pinId].name
     }
@@ -24,6 +34,9 @@ const mutations = {
     }
     if (isLogin === undefined) {
       params.isLogin = state.account[pinId].isLogin
+    }
+    if (isPlusMember === undefined) {
+      params.isPlusMember = state.account[pinId].isPlusMember
     }
     Vue.set(state.account, pinId, params)
   },
@@ -45,7 +58,12 @@ const actions = {
   async saveAccount ({ commit }, cookie) {
     const pinId = cookie.match(/pinId=(.*?);/)[1]
     const name = window.decodeURIComponent(cookie.match(/unick=(.*?);/)[1])
-    commit('SAVE_OR_UPDATE', { pinId, name, cookie, isLogin: true })
+    let res = {isLogin: false, isPlusMember: false}
+    try {
+      res = await api.jd.cookieCheck(cookie)
+    } finally {
+      commit('SAVE_OR_UPDATE', { pinId, name, isLogin: res.isLogin, isPlusMember: res.isPlusMember })
+    }
   },
   /**
    * 检查state里边所有账号有效性
@@ -57,11 +75,11 @@ const actions = {
     for (const key in state.account) {
       if (state.account.hasOwnProperty(key)) {
         const cookie = state.account[key].cookie
-        let isLogin = false
+        let res = {isLogin: false, isPlusMember: false}
         try {
-          isLogin = await api.jd.loginCheck(cookie)
+          res = await api.jd.cookieCheck(cookie)
         } finally {
-          commit('SAVE_OR_UPDATE', { pinId: key, isLogin })
+          commit('SAVE_OR_UPDATE', { pinId: key, isLogin: res.isLogin, isPlusMember: res.isPlusMember })
         }
       }
     }
@@ -71,6 +89,7 @@ const actions = {
 export default {
   namespaced: true,
   state,
+  getters,
   mutations,
   actions
 }
