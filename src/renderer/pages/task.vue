@@ -21,7 +21,6 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  // import api from '../api'
   const api = require('electron').remote.require('./api').default
 
   export default {

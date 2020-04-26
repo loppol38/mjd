@@ -19,9 +19,8 @@ async function cookieCheck (Cookie) {
         'User-Agent': UserAgent
       }
     })
-    console.log('loginCheck：', data)
     return {
-      isLogin: true,
+      isLogin: !!(data === true || data === false),
       isPlusMember: data === true
     }
   } catch (e) {
@@ -74,7 +73,6 @@ async function getBuyInfo (Cookie, sku, num) {
       'Content-Type': ContentType
     }
   })
-  console.log('getBuyInfo:', res.request)
   return res.data
 }
 
