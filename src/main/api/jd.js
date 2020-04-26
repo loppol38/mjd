@@ -24,7 +24,6 @@ async function cookieCheck (Cookie) {
       isPlusMember: data === true
     }
   } catch (e) {
-    console.error(e)
     return {
       isLogin: false
     }

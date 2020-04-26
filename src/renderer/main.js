@@ -1,4 +1,3 @@
-import devtools from '@vue/devtools'
 import Vue from 'vue'
 import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
@@ -7,7 +6,7 @@ import router from './router'
 import store from './store'
 
 if (process.env.NODE_ENV === 'development') {
-  devtools.connect('http://localhost', 8098)
+  require('@vue/devtools').connect('http://localhost', 8098)
 }
 
 Vue.use(ViewUI)
