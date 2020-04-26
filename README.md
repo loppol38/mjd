@@ -1,6 +1,8 @@
-# mjd
+<h1 align="center">京东预约抢购</h1>
 
-> mjd
+![预览](docs/preview.gif)
+
+> 体验一下electron，通过BrowserWindow拿网页cookies
 
 #### Build Setup
 
@@ -9,6 +11,7 @@
 npm install
 
 # serve with hot reload at localhost:9080
+# debug
 ./node_modules/.bin/vue-devtools
 npm run dev
 

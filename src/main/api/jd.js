@@ -61,7 +61,7 @@ async function getBuyUrl (Cookie, skuId) {
  * @returns {Promise<any>}
  */
 async function getBuyInfo (Cookie, sku, num) {
-  const res = await http.post('https://marathon.jd.com/seckillnew/orderService/pc/init.action', {
+  const { data } = await http.post('https://marathon.jd.com/seckillnew/orderService/pc/init.action', {
     sku,
     num,
     isModifyAddress: false
@@ -72,7 +72,7 @@ async function getBuyInfo (Cookie, sku, num) {
       'Content-Type': ContentType
     }
   })
-  return res.data
+  return data
 }
 
 async function orderSubmit (Cookie, skuId, num, buyInfo) {
@@ -106,8 +106,8 @@ async function orderSubmit (Cookie, skuId, num, buyInfo) {
     'areaCode': '',
     'overseas': 0,
     'phone': '',
-    'eid': 'xxx',
-    'fp': 'xxx',
+    'eid': '',
+    'fp': '',
     'token': buyInfo['token'],
     'pru': ''
   }, {

@@ -25,7 +25,7 @@ const getters = {
 }
 const mutations = {
   SAVE_OR_UPDATE (state, { pinId, name, cookie, isLogin, isPlusMember }) {
-    let params = {name, cookie, isLogin, isPlusMember}
+    let params = {pinId, name, cookie, isLogin, isPlusMember}
     if (!name) {
       params.name = state.account[pinId].name
     }
@@ -62,7 +62,7 @@ const actions = {
     try {
       res = await api.jd.cookieCheck(cookie)
     } finally {
-      commit('SAVE_OR_UPDATE', { pinId, name, isLogin: res.isLogin, isPlusMember: res.isPlusMember })
+      commit('SAVE_OR_UPDATE', { pinId, name, cookie, isLogin: res.isLogin, isPlusMember: res.isPlusMember })
     }
   },
   /**
